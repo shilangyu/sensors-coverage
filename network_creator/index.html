@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sensor network creator</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      .legend-ball {
+        --radius: 7px;
+        border-radius: var(--radius);
+        width: calc(var(--radius) * 2);
+        height: calc(var(--radius) * 2);
+        display: inline-block;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="./sketch.js" defer></script>
+  </head>
+  <body>
+    <main></main>
+    <fieldset>
+      <legend>Instructions</legend>
+      <ol>
+        <li>Press on the canvas to add a new sensor</li>
+        <li>Drag a sensor to move it</li>
+        <li>
+          Make sure when creating the sensor network that there exists a fence
+          coverage
+        </li>
+      </ol>
+    </fieldset>
+
+    The existence of fence sensors is to be enforced by users!
+
+    <fieldset>
+      <legend>Legend</legend>
+      <ul>
+        <li>Dot - a sensor</li>
+        <li>
+          <div class="legend-ball" id="legend-broadcast"></div>
+          ball - broadcast radius
+        </li>
+        <li>
+          <div class="legend-ball" id="legend-coverage"></div>
+          ball - coverage radius
+        </li>
+      </ul>
+    </fieldset>
+
+    <button id="save-sensors">Save sensors data</button>
+  </body>
+</html>
