@@ -1,6 +1,6 @@
 {
-  "broadcast_radius": "70",
-  "coverage_radius": "70",
+  "broadcast_radius": 35,
+  "coverage_radius": 35,
   "sensors": [
     {
       "x": 200,

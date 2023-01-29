@@ -1,6 +1,6 @@
 class Sensor {
   static {
-    this.drawRadius = 3;
+    this.drawRadius = 2;
     this.drawColor;
     this.broadcastColor;
     this.coverageColor;
@@ -45,8 +45,8 @@ function setup() {
   document.querySelector("#save-sensors").addEventListener("click", () => {
     saveJSON(
       {
-        broadcast_radius: broadcastRadius.value,
-        coverage_radius: coverageRadius.value,
+        broadcast_radius: +broadcastRadius.value,
+        coverage_radius: +coverageRadius.value,
         sensors: sensors.map((e) => ({ x: e.pos.x, y: e.pos.y })),
       },
       "sensors.json"
@@ -84,19 +84,19 @@ function draw() {
   fill(Sensor.broadcastColor);
   noStroke();
   for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, broadcastRadius.value);
+    circle(sensor.pos.x, sensor.pos.y, broadcastRadius.value * 2);
   }
 
   fill(Sensor.coverageColor);
   noStroke();
   for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, coverageRadius.value);
+    circle(sensor.pos.x, sensor.pos.y, coverageRadius.value * 2);
   }
 
   fill(Sensor.drawColor);
   stroke(Sensor.drawColor);
   for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, Sensor.drawRadius);
+    circle(sensor.pos.x, sensor.pos.y, Sensor.drawRadius * 2);
   }
 }
 
