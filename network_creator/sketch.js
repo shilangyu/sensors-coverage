@@ -1,7 +1,5 @@
 class Sensor {
   static {
-    this.broadcastRadius = 50;
-    this.coverageRadius = 70;
     this.drawRadius = 3;
     this.drawColor;
     this.broadcastColor;
@@ -14,12 +12,24 @@ class Sensor {
 }
 
 const sensors = [];
+const broadcastRadius = document.querySelector("#broadcast-radius");
+const coverageRadius = document.querySelector("#coverage-radius");
+
+const SIZE = { x: 700, y: 400 };
 
 function setup() {
-  createCanvas(700, 400);
+  createCanvas(SIZE.x, SIZE.y);
+
+  broadcastRadius.addEventListener("input", ({ target }) => {
+    document.querySelector("#broadcast-radius-value").innerText = target.value;
+  });
+  coverageRadius.addEventListener("input", ({ target }) => {
+    document.querySelector("#coverage-radius-value").innerText = target.value;
+  });
+
   Sensor.drawColor = color("black");
-  Sensor.broadcastColor = color(103, 157, 245, 50);
-  Sensor.coverageColor = color(130, 245, 216, 50);
+  Sensor.broadcastColor = color(103, 157, 245, 100);
+  Sensor.coverageColor = color(130, 245, 216, 100);
 
   document.querySelector("#legend-broadcast").style.backgroundColor =
     Sensor.broadcastColor.toString();
@@ -28,8 +38,8 @@ function setup() {
   document.querySelector("#save-sensors").addEventListener("click", () => {
     saveJSON(
       {
-        broadcast_radius: Sensor.broadcastRadius,
-        coverage_radius: Sensor.coverageRadius,
+        broadcast_radius: broadcastRadius.value,
+        coverage_radius: coverageRadius.value,
         sensors: sensors.map((e) => ({ x: e.pos.x, y: e.pos.y })),
       },
       "sensors.json"
@@ -40,22 +50,22 @@ function setup() {
 function draw() {
   background(220);
 
-  fill(Sensor.drawColor);
-  stroke(Sensor.drawColor);
-  for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, Sensor.drawRadius);
-  }
-
   fill(Sensor.broadcastColor);
   noStroke();
   for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, Sensor.broadcastRadius);
+    circle(sensor.pos.x, sensor.pos.y, broadcastRadius.value);
   }
 
   fill(Sensor.coverageColor);
   noStroke();
   for (const sensor of sensors) {
-    circle(sensor.pos.x, sensor.pos.y, Sensor.coverageRadius);
+    circle(sensor.pos.x, sensor.pos.y, coverageRadius.value);
+  }
+
+  fill(Sensor.drawColor);
+  stroke(Sensor.drawColor);
+  for (const sensor of sensors) {
+    circle(sensor.pos.x, sensor.pos.y, Sensor.drawRadius);
   }
 }
 
@@ -80,7 +90,13 @@ function mousePressed() {
   }
 }
 function mouseReleased() {
-  if (movedSensor === undefined) {
+  if (
+    movedSensor === undefined &&
+    mouseY >= 0 &&
+    mouseY < SIZE.y &&
+    mouseX >= 0 &&
+    mouseX < SIZE.x
+  ) {
     sensors.push(new Sensor(createVector(mouseX, mouseY)));
   }
   movedSensor = undefined;

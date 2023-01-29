@@ -6,16 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sensor network creator</title>
     <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      canvas {
-        display: block;
-      }
-
       .legend-ball {
         --radius: 7px;
         border-radius: var(--radius);
@@ -23,12 +13,46 @@
         height: calc(var(--radius) * 2);
         display: inline-block;
       }
+
+      .slider-value {
+        display: inline-block;
+        width: 25px;
+        text-align: right;
+      }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
     <script src="./sketch.js" defer></script>
   </head>
   <body>
     <main></main>
+
+    <label for="broadcast-radius"
+      >Broadcast radius:
+      <span class="slider-value" id="broadcast-radius-value">50</span></label
+    >
+    <input
+      type="range"
+      id="broadcast-radius"
+      min="50"
+      max="200"
+      step="1"
+      value="50"
+      autocomplete="off"
+    />
+    <label for="coverage-radius"
+      >Coverage radius:
+      <span class="slider-value" id="coverage-radius-value">70</span></label
+    >
+    <input
+      type="range"
+      id="coverage-radius"
+      min="50"
+      max="200"
+      step="1"
+      value="70"
+      autocomplete="off"
+    />
+
     <fieldset>
       <legend>Instructions</legend>
       <ol>
@@ -41,7 +65,7 @@
       </ol>
     </fieldset>
 
-    The existence of fence sensors is to be enforced by users!
+    No invariants are enforced here, it is user's responsibility.
 
     <fieldset>
       <legend>Legend</legend>
