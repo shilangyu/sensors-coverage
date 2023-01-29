@@ -11,7 +11,7 @@ class Sensor {
   }
 }
 
-const sensors = [];
+let sensors = [];
 const broadcastRadius = document.querySelector("#broadcast-radius");
 const coverageRadius = document.querySelector("#coverage-radius");
 
@@ -20,12 +20,19 @@ const SIZE = { x: 700, y: 400 };
 function setup() {
   createCanvas(SIZE.x, SIZE.y);
 
-  broadcastRadius.addEventListener("input", ({ target }) => {
-    document.querySelector("#broadcast-radius-value").innerText = target.value;
-  });
-  coverageRadius.addEventListener("input", ({ target }) => {
-    document.querySelector("#coverage-radius-value").innerText = target.value;
-  });
+  const handleSliderChange =
+    (id) =>
+    ({ target: { value } }) => {
+      document.querySelector(`#${id}-value`).innerText = value;
+    };
+  broadcastRadius.addEventListener(
+    "input",
+    handleSliderChange("broadcast-radius")
+  );
+  coverageRadius.addEventListener(
+    "input",
+    handleSliderChange("coverage-radius")
+  );
 
   Sensor.drawColor = color("black");
   Sensor.broadcastColor = color(103, 157, 245, 100);
@@ -45,6 +52,30 @@ function setup() {
       "sensors.json"
     );
   });
+  document.querySelector("#load-sensors").addEventListener("click", () => {
+    document.querySelector("#load-sensors-input").click();
+  });
+  document
+    .querySelector("#load-sensors-input")
+    .addEventListener("change", ({ target: { files } }) => {
+      const file = files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const data = JSON.parse(e.target.result);
+          broadcastRadius.value = data.broadcast_radius;
+          coverageRadius.value = data.coverage_radius;
+          handleSliderChange("broadcast-radius")({
+            target: { value: data.broadcast_radius },
+          });
+          handleSliderChange("coverage-radius")({
+            target: { value: data.coverage_radius },
+          });
+          sensors = data.sensors.map((e) => new Sensor(createVector(e.x, e.y)));
+        };
+        reader.readAsText(file);
+      }
+    });
 }
 
 function draw() {
