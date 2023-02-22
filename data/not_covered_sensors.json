@@ -1,5 +1,5 @@
 {
-  "broadcast_radius": 35,
+  "broadcast_radius": 70,
   "coverage_radius": 35,
   "sensors": [
     {
