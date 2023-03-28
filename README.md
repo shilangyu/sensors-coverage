@@ -16,7 +16,7 @@ Sensor coverage problem solved by means of homology of the Čech complex in a co
 
 ## Coordinate-free setting
 
-Sensor coverage problem solved by means of the Rips complex and its relative homology in a coordinate-free scenario.. [See here](./analysis/coordinate_free_coverage.ipynb).
+Sensor coverage problem solved by means of the Rips complex and its relative homology in a coordinate-free scenario. [See here](./analysis/coordinate_free_coverage.ipynb).
 
 ## Network examples
 
