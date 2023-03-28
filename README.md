@@ -10,7 +10,7 @@ This repository does not explain the concepts used from algebraic topology, it m
 
 To create networks which we wish to consider, a visual creator is located in [network_creator](./network_creator), hosted at [shilangyu.dev/sensors-coverage/network_creator/](https://shilangyu.dev/sensors-coverage/network_creator/).
 
-## Coordinate-full settingv
+## Coordinate-full setting
 
 Sensor coverage problem solved by means of homology of the Čech complex in a coordinate-full scenario. [See here](./analysis/coordinate_full_coverage.ipynb).
 
