@@ -8,7 +8,7 @@ This repository does not explain the concepts used from algebraic topology, it m
 
 ## Network creator
 
-To create networks which we wish to consider, a visual creator is located in [network_creator](./network_creator), hosted at [shilangyu.dev/sensors-coverage/network_creator/](https://shilangyu.dev/sensors-coverage/network_creator/).
+To create networks which we wish to consider, a visual creator is located in [network_creator](./network_creator), hosted at [github.shilangyu.dev/sensors-coverage/network_creator/](https://github.shilangyu.dev/sensors-coverage/network_creator/).
 
 ## Coordinate-full setting
 
